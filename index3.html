@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MediVoice AI Assistant</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* local layout overrides for vapi button host (unchanged) */
+    .calling-screen {
+      position: relative;
+    }
+
+    .vapi-button-container {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 14px;
+      z-index: 1200;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+    }
+
+    #vapi-button {
+      pointer-events: auto;
+      display: inline-flex;
+    }
+
+    .has-sdk #fallback-vapi-btn {
+      display: none;
+    }
+
+    #fallback-vapi-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      height: 56px;
+      padding: 10px 20px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer
+    }
+
+    @media (max-width:760px) {
+      #fallback-vapi-btn {
+        height: 50px;
+        padding: 8px 14px;
+        font-size: 13px
+      }
+    }
+
+    @media (max-width:420px) {
+      .vapi-button-container {
+        bottom: 10px
+      }
+
+      #fallback-vapi-btn {
+        height: 46px;
+        padding: 6px 12px;
+        font-size: 13px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="calling-screen">
+      <div class="profile">
+        <div class="profile-pic">
+          <img src="https://img.freepik.com/premium-photo/young-indian-male-doctor-with-little-smile_973056-9.jpg"
+            alt="">
+          </i>
+        </div>
+        <h2>Dr. Arun Kumar</h2>
+        <p>Virtual Medical Assistant</p>
+      </div>
+
+      <div class="call-status">
+        <span class="status-indicator status-offline" id="status-indicator"></span>
+        <span id="call-status">Ready to connect</span>
+        <div class="timer" id="timer">00:00</div>
+      </div>
+
+      <div class="transcript-box" id="transcript-container">
+        <div class="no-data" id="no-transcript">Conversation transcript will appear here...</div>
+        <!-- messages will be appended here -->
+      </div>
+
+      <div class="call-controls">
+        <button class="control-btn" id="mute-btn" title="Mute"><a href="#" style="text-decoration: none;"><i
+              class="fas fa-volume-high"></i></a></button>
+        <button class="control-btn" id="record-btn" title="Record"><a href="chat.html" style="text-decoration:none;"><i
+              class="fas fa-comment-dots"></i></a></button>
+      </div>
+
+      <div class="vapi-button-container">
+        <div id="vapi-button">
+          <button id="fallback-vapi-btn" type="button"><i class="fa-solid fa-phone"></i> Start Call</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer / history -->
+  <div class="footer">
+    <div class="history-section">
+      <div class="section-title"><i class="fas fa-history"></i> Call History</div>
+      <div class="history-controls">
+        <button class="history-btn" id="clear-history"><i class="fas fa-trash"></i> Clear History</button>
+      </div>
+
+      <div class="call-history" id="call-history">
+        <div class="no-data" id="no-history">No call history available</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vapi integration -->
+  <script src="vapi-integration3.js"></script>
+
+  <!-- App logic -->
+  <script src="app.js"></script>
+</body>
+
+</html>
